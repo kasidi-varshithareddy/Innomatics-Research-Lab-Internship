@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Personal Budget Tracker</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 20px;
+        }
+  
+        h1 {
+          color: #333;
+        }
+  
+        form div {
+          margin-bottom: 10px;
+        }
+  
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+        }
+  
+        table, th, td {
+          border: 1px solid #ccc;
+        }
+  
+        th, td {
+          padding: 10px;
+          text-align: left;
+        }
+  
+        th {
+          background-color: #f4f4f4;
+        }
+  
+        .action-btn {
+          padding: 5px 10px;
+          margin-right: 5px;
+          border: none;
+          cursor: pointer;
+        }
+  
+        .edit-btn {
+          background-color: #4caf50;
+          color: white;
+        }
+  
+        .delete-btn {
+          background-color: #f44336;
+          color: white;
+        }
+      </style>
+  </head>
+  <body>
+    <h1>Personal Budget Tracker</h1>
+    <p>Track your expenses and income with this simple budget tracker.</p>
+    <h1>Add New Income or Expense</h1>
+    <form id="entryForm">
+      <div>
+        <label for="Amount">Amount:</label>
+        <input type="number" id="Amount" name="Amount" required>
+      </div>
+      <div>
+        <label for="Category">Category:</label>
+        <select id="Category" name="Category">
+          <option value="Housing">Housing</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Food">Food</option>
+          <option value="Utilities">Utilities</option>
+          <option value="Insurance">Insurance</option>
+          <option value="Medical/Healthcare">Medical/Healthcare</option>
+          <option value="Savings">Savings</option>
+          <option value="Personal">Personal</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Miscellaneous">Miscellaneous</option>
+        </select>
+      </div>
+      <div>
+        <label for="Description">Description:</label>
+        <input type="text" id="Description" name="Description" required>
+      </div>
+      <div>
+        <label for="Date">Date:</label>
+        <input type="date" id="Date" name="Date" required>
+      </div>
+      <div>
+        <label for="Type">Type:</label>
+        <input type="radio" id="Income" name="Type" value="Income" required>
+        <label for="Income">Income</label>
+        <input type="radio" id="Expense" name="Type" value="Expense">
+        <label for="Expense">Expense</label>
+      </div>
+      <div>
+        <button type="button" onclick="addEntry()">Add Entry</button>
+      </div>
+    </form>
+
+    <h1>Budget Summary</h1>
+    <table id="budgetTable">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <script>
+      function addEntry() {
+        const amount = document.getElementById("Amount").value;
+        const category = document.getElementById("Category").value;
+        const description = document.getElementById("Description").value;
+        const date = document.getElementById("Date").value;
+        const type = document.querySelector('input[name="Type"]:checked')?.value;
+
+        if (!amount || !category || !description || !date || !type) {
+          alert("Please fill out all fields.");
+          return;
+        }
+
+        const table = document.getElementById("budgetTable").querySelector("tbody");
+        const newRow = table.insertRow();
+
+        const categoryCell = newRow.insertCell(0);
+        const amountCell = newRow.insertCell(1);
+        const descriptionCell = newRow.insertCell(2);
+        const dateCell = newRow.insertCell(3);
+        const typeCell = newRow.insertCell(4);
+        const actionCell = newRow.insertCell(5);
+
+        categoryCell.textContent = category;
+        amountCell.textContent = `$${amount}`;
+        descriptionCell.textContent = description;
+        dateCell.textContent = date;
+        typeCell.textContent = type;
+
+        actionCell.innerHTML = `
+          <button class="action-btn edit-btn" onclick="editEntry(this)">Edit</button>
+          <button class="action-btn delete-btn" onclick="deleteEntry(this)">Delete</button>
+        `;
+        document.getElementById("entryForm").reset();
+      }
+
+      function deleteEntry(button) {
+        const row = button.parentElement.parentElement;
+        row.remove();
+      }
+
+      function editEntry(button) {
+        const row = button.parentElement.parentElement;
+        const cells = row.querySelectorAll("td");
+
+        document.getElementById("Category").value = cells[0].textContent;
+        document.getElementById("Amount").value = cells[1].textContent.slice(1);
+        document.getElementById("Description").value = cells[2].textContent;
+        document.getElementById("Date").value = cells[3].textContent;
+        document.querySelector(`input[name="Type"][value="${cells[4].textContent}"]`).checked = true;
+        row.remove();
+      }
+    </script>
+  </body>
+</html>
+
+
