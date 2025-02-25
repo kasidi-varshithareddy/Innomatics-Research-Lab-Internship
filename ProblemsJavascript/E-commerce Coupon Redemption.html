@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coupon Discount Calculator</title>
+    <style>
+        h1{
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        .container{
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+        }
+        input{
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+        button{
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #f1f1f1;
+            color: #333;
+        }
+        #message{
+            text-align: center;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Coupon Discount Calculator</h1>
+        <label for="orderAmount">Order Amount:</label>
+        <input type="number" id="orderAmount" placeholder="Enter order amount">
+
+        <label for="couponCode">Coupon Code:</label>
+        <select id="couponCode">
+            <option value="">Select coupon</option>
+            <option value="DISCOUNT10">DISCOUNT10 (10% off for orders above $500)</option>
+            <option value="FREESHIP">FREESHIP (Free shipping for orders above $200)</option>
+        </select>
+
+        <button onclick="calculateFinalPrice()">Apply Coupon</button>
+
+        <h2>Final Price: $<span id="finalPrice">0.00</span></h2>
+    </div>
+
+    <script>
+        function applyCoupon(orderAmount, couponCode) {
+            let discount = 0;
+            let shippingCost = 50; 
+            if (couponCode === "DISCOUNT10" && orderAmount > 500) {
+                discount = orderAmount * 0.10;
+            } else if (couponCode === "FREESHIP" && orderAmount > 200) {
+                shippingCost = 0;
+            }
+            let finalPrice = orderAmount - discount + shippingCost;
+            return finalPrice;
+        }
+
+        function calculateFinalPrice() {
+            const orderAmount = parseFloat(document.getElementById("orderAmount").value);
+            const couponCode = document.getElementById("couponCode").value;
+            const finalPrice = applyCoupon(orderAmount, couponCode);
+            document.getElementById("finalPrice").textContent = finalPrice.toFixed(2);
+        }
+    </script>
+</body>
+</html>

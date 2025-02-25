@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Withdrawal System</title>
+    <style>
+        h1{
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        .container{
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+        }
+        input{
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+        button{
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #f1f1f1;
+            color: #333;
+        }
+        #message{
+            text-align: center;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ATM Withdrawal System</h1>
+        <label for="amount">Enter Amount:</label>
+        <input type="number" id="amount" placeholder="Enter Amount"><br></br>
+        <label for="balance">Balance:</label>
+        <input type="number" id="balance" placeholder="Balance"><br></br>
+        <label for="pin">Enter Pin:</label>
+        <input type="password" id="pin" placeholder="Enter Pin"><br></br>
+        <label for="enteredPin">Re-enter Pin:</label>
+        <input type="password" id="enteredPin" placeholder="Re-enter Pin"><br></br>
+        <button onclick="withdraw()">Withdraw</button>
+        <p id="message"></p>
+        <script>
+            function withdraw(amount,balance,pin,enteredPin){
+                amount = document.getElementById("amount").value;
+                balance = document.getElementById("balance").value;
+                pin = document.getElementById("pin").value;
+                enteredPin = document.getElementById("enteredPin").value;
+                if (pin === enteredPin){
+                    if (amount <= balance){
+                        balance -= amount;
+                        document.getElementById("message").innerHTML = "Withdrawal Successful. Your new balance is: " + balance;
+                    } else {
+                        document.getElementById("message").innerHTML = "Insufficient Balance";
+                    }
+                } else {
+                    document.getElementById("message").innerHTML = "Pin does not match";
+                }
+            }
+        </script>
+    </div>
+    
+</body>
+</html>

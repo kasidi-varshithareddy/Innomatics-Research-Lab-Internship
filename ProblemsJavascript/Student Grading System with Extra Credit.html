@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentGradingSystemwithExtraCredit</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #f1f1f1;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Grading System with Extra Credit</h1>
+    <div class="container">
+        <form>
+           <label for="StudentAttendence">Student Attendence:</label>
+           <input type="number" id="StudentAttendence" required>
+           <label for="Extracredits">Extracredits</label>
+           <input type="number" id="Extracredits" required>
+           <button type="button" onclick="calculateGrade()">Calculate</button>
+           <p id="result"></p>
+        </form>
+        <script>
+            function calculateGrade(){
+                let StudentAttendence = document.getElementById("StudentAttendence").value;
+                let Extracredits = document.getElementById("Extracredits").value;
+                let grade = "";
+                if(StudentAttendence >= 90 && Extracredits >= 5){
+                    grade = "A+";
+                } else if(StudentAttendence >= 80 && Extracredits >= 4){
+                    grade = "A";
+                } else if(StudentAttendence >= 70 && Extracredits >= 3){
+                    grade = "B";
+                } else if(StudentAttendence >= 60 && Extracredits >= 2){
+                    grade = "C";
+                } else if(StudentAttendence >= 50 && Extracredits >= 1){
+                    grade = "D";
+                } else {
+                    grade = "F";
+                }
+                document.getElementById("result").innerHTML = "Grade: " + grade;
+            }
+
+        </script>
+    
+        
+    </div>
+    
+</body>
+</html>

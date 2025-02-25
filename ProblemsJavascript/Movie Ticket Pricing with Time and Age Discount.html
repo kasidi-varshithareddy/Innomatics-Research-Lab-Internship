@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Pricing with Time Age Discount</title>
+    <style>
+        body {
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        p {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Ticket Pricing with Time Age Discount</h1>
+    <div class="container">
+        <input type="number" id="age" placeholder="Age" /><br /><br />
+        <input type="number" id="showTime" placeholder="Show Time (24h)" />
+        <button onclick="CalculateTicketPrice()">Calculate Ticket Price</button>
+        <p id="ticketResult"></p>
+        <script>
+            function CalculateTicketPrice() {
+                const age = parseInt(document.getElementById("age").value);
+                const showTime = parseInt(document.getElementById("showTime").value);
+                const result = calculateTicketPrice(age, showTime);
+                document.getElementById("ticketResult").innerText = `Ticket Price: $${result}`;
+        }
+        </script>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping Discount & Free Shipping</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #f1f1f1;
+            color: #333;
+        }
+        #result {
+            text-align: center;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Online Shopping Discount & Free Shipping</h1>
+    <div class="container">
+        <form>
+            <label for="orderAmount">Order Amount:</label>
+            <input type="number" id="orderAmount" required>
+            <button type="button" onclick="calculateOrder()">Calculate</button>
+            <p id="result"></p>
+        </form>
+        <script>
+            function calculateOrder(orderAmount){
+                if(orderAmount >= 1000){
+                    document.getElementById("result").innerHTML = "You have received a 20% discount and free shipping!";
+                    discount = orderAmount * 0.20;
+                    total2=orderAmount-discount-shippingCharges;
+                    document.getElementById("result").innerHTML += " Total amount to be paid finally: $" + total2;
+                } else if(orderAmount >= 500 && orderAmount < 1000){
+                    discount = orderAmount * 0.10;
+                    total3=orderAmount-discount-shippingCharges;
+                    document.getElementById("result").innerHTML = "You have received a 10% discount and free shipping!";
+                    document.getElementById("result").innerHTML += " Total amount to be paid finally: $" + total3;
+                } else if(orderAmount < 500){
+                    total4=orderAmount-shippingCharges;
+                    document.getElementById("result").innerHTML = "No discount,You have received free shipping!";
+                    document.getElementById("result").innerHTML += " Total amount to be paid finally: $" + total4;
+                } else {
+                    document.getElementById("result").innerHTML = "No discount or free shipping available.";
+                }
+                if (orderAmount >= 50) {
+                    shippingCharges = 0;
+                    document.getElementById("result").innerHTML += " Shipping charges: $" + shippingCharges;
+                    total=orderAmount+shippingCharges;
+                    document.getElementById("result").innerHTML += " Total Amount to paid finally: $" + total;
+                } else {
+                    shippingCharges = 10;
+                    total1=orderAmount+shippingCharges;
+                    document.getElementById("result").innerHTML += " Shipping charges finally: $" + total1;
+                }
+                console.log(calculateOrder(1200));
+                console.log(calculateOrder(750));
+                console.log(calculateOrder(200));
+            }    
+        </script>
+    </div>
+    
+</body>
+</html>

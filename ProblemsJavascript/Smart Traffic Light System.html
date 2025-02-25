@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Traffic Light System</title>
+    <style>
+        h1 {
+        text-align: center;
+        color: #333;
+        margin-top: 50px;
+    }
+    .container {
+        width: 50%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f1f1f1;
+        border-radius: 10px;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border: 1px solid #333;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border: 1px solid #333;
+        background-color: #333;
+        color: #fff;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #f1f1f1;
+        color: #333;
+    }
+    #result {
+        text-align: center;
+        color: #333;
+        margin-top: 10px;
+    }
+    </style>
+        
+    
+</head>
+<body>
+    <h1>Smart Traffic Light System</h1>
+    <div class="container">
+        <form>
+            <label for="density">Traffic Density:</label>
+            <select id="density">
+                <option value="Heavy Traffic">Heavy Traffic</option>
+                <option value="Moderate Traffic">Moderate Traffic</option>
+                <option value="Light Traffic">Light Traffic</option>
+            </select>
+            <button onclick="trafficLightControl()">Control Traffic Light</button>
+            <p id="result"></p>
+        </form>    
+        <script>
+           function trafficLightControl(density) {
+                density = document.getElementById("density").value;
+                if (density === "Heavy Traffic") {
+                    return 60;
+                    document.getElementById("result").innerHTML = "Traffic heavy is 60";
+                } else if (density === "Moderate Traffic") {
+                    return 40;
+                    document.getElementById("result").innerHTML = "Traffic moderate is 40";
+                } else if (density === "Light Traffic") {
+                     return 20;
+                    document.getElementById("result").innerHTML = "Traffic light is 20";
+                } else {
+                     throw new Error("Invalid traffic density");
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

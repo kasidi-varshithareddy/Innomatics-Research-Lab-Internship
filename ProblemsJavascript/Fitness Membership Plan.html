@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Membership Plan Selector</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #f1f1f1;
+            color: #333;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fitness Membership Plan Selector</h1>
+
+        <label for="planType">Choose your basic plan:</label>
+        <select id="planType">
+            <option value="basic">Basic ($20/month)</option>
+            <option value="premium">Premium ($50/month)</option>
+            <option value="vip">VIP ($80/month)</option>
+        </select>
+
+        <label>
+            <input type="checkbox" id="wantsTrainer">
+            I want a personal trainer
+        </label>
+
+        <label>
+            <input type="checkbox" id="wantsDietPlan">
+            I want a diet plan
+        </label>
+
+        <button onclick="suggestPlan()">Suggest Best Plan</button>
+
+        <h2>Suggested Plan: <span id="suggestedPlan">None</span></h2>
+    </div>
+
+    <script>
+        function choosePlan(planType, wantsTrainer, wantsDietPlan) {
+            let suggestedPlan = "Basic";
+
+            if (planType === "basic" && wantsTrainer && wantsDietPlan) {
+                suggestedPlan = "VIP";
+            } else if (planType === "basic" && wantsTrainer) {
+                suggestedPlan = "Premium";
+            } else if (planType === "premium" && wantsDietPlan) {
+                suggestedPlan = "VIP";
+            } else if (planType === "premium" && !wantsDietPlan) {
+                suggestedPlan = "Premium";
+            } else if (planType === "vip") {
+                suggestedPlan = "VIP";
+            }
+
+            return suggestedPlan;
+        }
+
+        function suggestPlan() {
+            const planType = document.getElementById("planType").value;
+            const wantsTrainer = document.getElementById("wantsTrainer").checked;
+            const wantsDietPlan = document.getElementById("wantsDietPlan").checked;
+
+            const suggestedPlan = choosePlan(planType, wantsTrainer, wantsDietPlan);
+            document.getElementById("suggestedPlan").textContent = suggestedPlan;
+        }
+    </script>
+</body>
+</html>
+
